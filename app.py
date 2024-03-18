@@ -1,12 +1,15 @@
 import gradio as gr
 from PIL import Image
 import pytesseract
+import numpy as np
 
 
 def perform_ocr(image):
     # Extract text from Input Image
     # Convert to PIL from NP Array
-    image = Image.fromarray(image)
+    if isinstance(image, np.ndarray):
+        image = Image.fromarray(image)
+        
     # Convert the input image to text
     text = pytesseract.image_to_string(image)
     return text
